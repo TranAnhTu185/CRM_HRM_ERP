@@ -12,7 +12,7 @@ import {
     Title,
     Group,
     Button,
-    ActionIcon,
+    ActionIcon, Popover, Stack,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ChildFormProps, childProps } from "@/app/(main)/types/consts";
@@ -135,6 +135,12 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
     const addReplyTo = () => {
         handlersetShowReplyTo.append([]);
     };
+
+    const filteredOptions2=[
+        { value: "var1", label: "Biến 1" },
+        { value: "var2", label: "Biến 2" },
+        { value: "var3", label: "Biến 3" },
+    ]
     return (
         <Box mx="auto">
             <form>
@@ -185,6 +191,52 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                     </Button>
                 </Group>
                 {/*Người gửi*/}
+                {/*<Popover>*/}
+                {/*    <Popover.Target>*/}
+                {/*        <TextInput*/}
+                {/*            flex={1}*/}
+                {/*            mt={'sm'}*/}
+                {/*            label="Người gửi"*/}
+                {/*            placeholder="Chọn người gửi"*/}
+                {/*            value={*/}
+                {/*                [   { value: "1", label: 'Ông A' },*/}
+                {/*                    { value: "2", label: 'Bà B' },*/}
+                {/*                ].find((o) => o.value === form.getValues().from)?.label ??""*/}
+                {/*            }*/}
+                {/*            // onClick={(e) => {*/}
+                {/*            //     const target = (e?.currentTarget as HTMLElement)?.closest<HTMLElement>("[data-popover-target]");*/}
+                {/*            //     if (target) (target as HTMLElement).click();*/}
+
+                {/*            // }}*/}
+                {/*            readOnly*/}
+                {/*        />*/}
+                {/*    </Popover.Target>*/}
+                {/*    <Popover.Dropdown>*/}
+                {/*        <Stack gap="xs">*/}
+                {/*            {[*/}
+                {/*                { value: "1", label: 'Ông A' },*/}
+                {/*                { value: "2", label: 'Bà B' },*/}
+                {/*            ].map((option) => (*/}
+                {/*                <Button*/}
+                {/*                    key={option.value}*/}
+                {/*                    variant={option.value === form.getValues().from? "light" : "transparent"}*/}
+                {/*                    fullWidth*/}
+                {/*                    onClick={() => {*/}
+
+
+                {/*                        form.setFieldValue('from', option.value)*/}
+
+                {/*                        // updateCondition(groupIndex, condIndex, "type", option.value || "")*/}
+                {/*                    }}*/}
+                {/*                >*/}
+                {/*                    {option.label}*/}
+                {/*                </Button>*/}
+                {/*            ))}*/}
+                {/*        </Stack>*/}
+                {/*    </Popover.Dropdown>*/}
+                {/*</Popover>*/}
+
+
                 <Select
                     required
                     label="Người gửi"
@@ -294,19 +346,76 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                 />
 
                 {/*Nội dung email*/}
-                <Select
-                    required
-                    label="Nội dung email"
-                    placeholder="Chọn..."
-                    mt="sm"
-                    withAsterisk
-                    data={[
-                        { value: "1", label: 'Nhập nội dung thủ công' },
-                        { value: "2", label: 'Sử dụng mẫu văn bản' },
-                        { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },
-                    ]}
-                    {...form.getInputProps('emailContent')}
-                />
+                {/*<Select*/}
+                {/*    required*/}
+                {/*    label="Nội dung email"*/}
+                {/*    placeholder="Chọn..."*/}
+                {/*    mt="sm"*/}
+                {/*    withAsterisk*/}
+                {/*    data={[*/}
+                {/*        { value: "1", label: 'Nhập nội dung thủ công' },*/}
+                {/*        { value: "2", label: 'Sử dụng mẫu văn bản' },*/}
+                {/*        { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },*/}
+                {/*    ]}*/}
+                {/*    {...form.getInputProps('emailContent')}*/}
+                {/*/>*/}
+
+                <Popover
+                    position="bottom-start"
+
+                >
+                    <Popover.Target>
+                        <TextInput
+                            flex={1}
+                            mt={'sm'}
+                            label="Người gửi"
+
+                            placeholder="Chọn người gửi"
+                            value={
+                                [    { value: "1", label: 'Nhập nội dung thủ công' },
+                                    { value: "2", label: 'Sử dụng mẫu văn bản' },
+                                    { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },
+                                ].find((o) => o.value === form.getValues().emailContent)?.label ??""
+                            }
+                            // onClick={(e) => {
+                            //     const target = (e?.currentTarget as HTMLElement)?.closest<HTMLElement>("[data-popover-target]");
+                            //     if (target) (target as HTMLElement).click();
+
+                            // }}
+
+                            readOnly
+                        />
+                    </Popover.Target>
+                    <Popover.Dropdown>
+                        <Stack gap="xs">
+                            {[
+                                { value: "1", label: 'Nhập nội dung thủ công' },
+                                { value: "2", label: 'Sử dụng mẫu văn bản' },
+                                { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },
+                            ].map((option) => (
+                                <Button
+
+                                    key={option.value}
+                                    variant={option.value === form.getValues().from? "light" : "transparent"}
+                                    fullWidth
+                                    onClick={() => {
+
+
+                                        form.setFieldValue('emailContent', option.value)
+
+                                        // updateCondition(groupIndex, condIndex, "type", option.value || "")
+                                    }}
+                                >
+                                  {option.label}
+                                </Button>
+                            ))}
+                        </Stack>
+                    </Popover.Dropdown>
+                </Popover>
+
+
+
+
 
                 {form.values.emailContent === "1" && <RichTextEditor mt="sm" {...form.getInputProps('body')} editor={editor}
                     styles={{

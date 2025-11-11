@@ -2,7 +2,7 @@
 
 import BpmnJS from 'bpmn-js/lib/Modeler';
 import Image from "next/image";
-import UserTask from "../../../public/icon/user-task.svg";
+import UserTask from "@/public/icon/user-task.svg";
 import { NodeModel, useManagerBpmnContext } from '@/app/(main)/libs/contexts/manager-bpmn-context';
 export default function BpmnSidebar({ modeler }: { modeler: BpmnJS | null }) {
   const { data, setData, taskItems, gatewayItems, eventItems } = useManagerBpmnContext()

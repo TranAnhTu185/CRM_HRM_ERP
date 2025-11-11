@@ -1,23 +1,23 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from "react";
-import UserTask from "../../../../public/icon/user-task.svg";
-import SendEmail from "../../../../public/icon/email-task.svg";
-import SendHTTP from "../../../../public/icon/http-request-task.svg";
-import Organization from "../../../../public/icon/organization-task.svg";
-import Notification from "../../../../public/icon/notification-task.svg";
-import Record from "../../../../public/icon/record-task.svg";
-import GetRecord from "../../../../public/icon/get-record-task.svg";
-import Loop from "../../../../public/icon/loop-task.svg";
-import PhoneCall from "../../../../public/icon/phone-call-task.svg";
+import UserTask from "@/public/icon/user-task.svg";;
+import SendEmail from "@/public/icon/email-task.svg";
+import SendHTTP from "@/public/icon/http-request-task.svg";
+import Organization from "@/public/icon/organization-task.svg";
+import Notification from "@/public/icon/notification-task.svg";
+import Record from "@/public/icon/record-task.svg";
+import GetRecord from "@/public/icon/get-record-task.svg";
+import Loop from "@/public/icon/loop-task.svg";
+import PhoneCall from "@/public/icon/phone-call-task.svg";
 
-import Exclusive from "../../../../public/icon/exclusive-gateway.svg";
-import Inclusive from "../../../../public/icon/inclusive-gateway.svg";
-import Parallel from "../../../../public/icon/parallel-gateway.svg";
+import Exclusive from "@/public/icon/exclusive-gateway.svg";
+import Inclusive from "@/public/icon/inclusive-gateway.svg";
+import Parallel from "@/public/icon/parallel-gateway.svg";
 
-import Wait from "../../../../public/icon/wait-task.svg";
-import Ends from "../../../../public/icon/end-event.svg";
-import Start from "../../../../public/icon/start-event.svg";
+import Wait from "@/public/icon/wait-task.svg";
+import Ends from "@/public/icon/end-event.svg";
+import Start from "@/public/icon/start-event.svg";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { ComponentProps, IButtonGroup, IOptionSelect } from "@/app/(main)/types/consts";
 
