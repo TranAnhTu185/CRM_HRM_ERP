@@ -61,24 +61,24 @@ export default function LoginPage() {
 
             if (token) {
                 document.cookie = `t=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // lưu 7 ngày
-                localStorage.setItem("Token", JSON.stringify(token));
+                localStorage.setItem("token", JSON.stringify(token));
             }
-            const resdoamin = await fetch("https://dadujsc.online/api/auth/create-workplace-token", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Cookie": "t=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXV0djE5OTNAZ21haWwuY29tIiwidXNlcl9pZCI6IldOT1dsMjJSbW4yTlRQWTE3ZHNlIiwiZGlzcGxheV9uYW1lIjoiZGF1dHYxOTkzQGdtYWlsLmNvbSIsImF2YXRhciI6Imh0dHBzOi8va2llbXRyYXBoYXRuZ3VvaS5jb20udm4vaW1hZ2VzL2F2YXRhci5qcGciLCJ0aXRsZSI6IiIsImlhdCI6MTc2MTQ4NzYyNiwiZXhwIjoxNzc3MDM5NjI2fQ.Z47oj6CiLSm0c4Yq6IrHblQ0sgnDGN2w716C05VTPnI"
-                },
-                body: JSON.stringify({
-                    "continue": "http://localhost:3000"
-                }),
-            });
+            // const resdoamin = await fetch("https://dadujsc.online/api/auth/create-workplace-token", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Cookie": "t=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXV0djE5OTNAZ21haWwuY29tIiwidXNlcl9pZCI6IldOT1dsMjJSbW4yTlRQWTE3ZHNlIiwiZGlzcGxheV9uYW1lIjoiZGF1dHYxOTkzQGdtYWlsLmNvbSIsImF2YXRhciI6Imh0dHBzOi8va2llbXRyYXBoYXRuZ3VvaS5jb20udm4vaW1hZ2VzL2F2YXRhci5qcGciLCJ0aXRsZSI6IiIsImlhdCI6MTc2MTQ4NzYyNiwiZXhwIjoxNzc3MDM5NjI2fQ.Z47oj6CiLSm0c4Yq6IrHblQ0sgnDGN2w716C05VTPnI"
+            //     },
+            //     body: JSON.stringify({
+            //         "continue": "http://localhost:3000"
+            //     }),
+            // });
 
-            const datadomain = await resdoamin.json();    
+            // const datadomain = await resdoamin.json();    
 
-            if (!resdoamin.ok) {
-                throw new Error(data?.message || "Lỗi");
-            }
+            // if (!resdoamin.ok) {
+            //     throw new Error(data?.message || "Lỗi");
+            // }
 
             notifications.show({
                 color: "green",
@@ -86,7 +86,7 @@ export default function LoginPage() {
                 message: "Chào mừng bạn trở lại!",
             });
 
-            // router.push("/");
+            router.push("/");
         } catch (error: any) {
             notifications.show({
                 color: "red",
@@ -165,7 +165,7 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-2 rounded-lg bg-sky-600 text-white font-medium disabled:opacity-60"
+                                className="w-full py-2 rounded-lg bg-sky-600 cursor-pointer text-white font-medium disabled:opacity-60"
                             >
                                 {loading ? "Đang đăng nhập..." : "Đăng nhập"}
                             </button>
@@ -179,8 +179,8 @@ export default function LoginPage() {
                             </div>
 
                             <div className="mt-3 grid grid-cols-2 gap-3">
-                                <button type="button" onClick={() => alert('Đăng nhập với Google (mô phỏng)')} className="py-2 rounded-lg border">Google</button>
-                                <button type="button" onClick={() => alert('Đăng nhập với GitHub (mô phỏng)')} className="py-2 rounded-lg border">GitHub</button>
+                                <button type="button" onClick={() => alert('Đăng nhập với Google (mô phỏng)')} className="py-2 rounded-lg border cursor-pointer">Google</button>
+                                <button type="button" onClick={() => alert('Đăng nhập với GitHub (mô phỏng)')} className="py-2 rounded-lg border cursor-pointer">GitHub</button>
                             </div>
                         </div>
 

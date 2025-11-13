@@ -67,9 +67,16 @@ export default function ProcessesPage() {
     ]);
 
     const [openedUpdate, setOpenedUpdate] = useState(false);
+
     useEffect(() => {
-        fetchData();
-    }, [])
+        const token = localStorage.getItem('token')
+        if (!token) {
+            router.replace('/login')
+        } else {
+            fetchData();
+        }
+    }, [router])
+
 
     const addPermission = () => {
         setPermissions([
