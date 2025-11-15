@@ -69,11 +69,13 @@ export default function ProcessesPage() {
     const [openedUpdate, setOpenedUpdate] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        if (!token) {
-            router.replace('/login')
-        } else {
-            fetchData();
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token')
+            if (!token) {
+                router.replace('/login')
+            } else {
+                fetchData();
+            }
         }
     }, [router])
 
