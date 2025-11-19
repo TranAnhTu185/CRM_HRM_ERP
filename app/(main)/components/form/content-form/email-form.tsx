@@ -29,6 +29,7 @@ import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 import { IconFileZip, IconTrash } from "@tabler/icons-react";
 import { useListState } from "@mantine/hooks";
+import { ComboSelect } from "../../base/comboboxSelect";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +43,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
     const icon = <IconFileZip size={18} stroke={1.5} />;
     useImperativeHandle(ref, () => ({
         onSubmit: () => {
+            console.log(form.values);
             const { hasErrors } = form.validate();
             if (!hasErrors) {
                 const data = { ...form.values, cc: showCc, bcc: showBcc, replyTo: showReplyTo };
@@ -136,7 +138,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
         handlersetShowReplyTo.append([]);
     };
 
-    const filteredOptions2=[
+    const filteredOptions2 = [
         { value: "var1", label: "Biến 1" },
         { value: "var2", label: "Biến 2" },
         { value: "var3", label: "Biến 3" },
@@ -237,7 +239,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                 {/*</Popover>*/}
 
 
-                <Select
+                {/* <Select
                     required
                     label="Người gửi"
                     placeholder="Chọn người gửi..."
@@ -248,7 +250,22 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                     ]}
                     {...form.getInputProps('from')}
                     withAsterisk
+                /> */}
+
+                <ComboSelect
+                    label="Người gửi"
+                    placeholder="Chọn người gửi..."
+                    data={[
+                        { value: "1", label: 'Ông A' },
+                        { value: "2", label: 'Bà B' },
+                    ]}
+                    value={form.values.from}
+                    onChange={(opt) => {
+                        form.setFieldValue('from', opt.value)
+                    }}
                 />
+
+
                 {/*Người nhận*/}
                 <TagsInput
                     required
@@ -282,7 +299,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                 ))}
                 {showBcc && showBcc.length > 0 && <Title mt="sm" order={5}>BCC</Title>}
                 {showBcc.map((value, index) => (
-                    <Group key={index} mb="sm"  grow align="center" className="flex items-center ius" preventGrowOverflow={false} wrap="nowrap">
+                    <Group key={index} mb="sm" grow align="center" className="flex items-center ius" preventGrowOverflow={false} wrap="nowrap">
                         <TagsInput
                             placeholder="Bcc..."
                             maxTags={3}
@@ -302,7 +319,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                 ))}
                 {showReplyTo && showReplyTo.length > 0 && <Title mt="sm" order={5}>Reply-To</Title>}
                 {showReplyTo.map((value, index) => (
-                    <Group key={index} mb="sm"  grow align="center" className="flex items-center ius" preventGrowOverflow={false} wrap="nowrap">
+                    <Group key={index} mb="sm" grow align="center" className="flex items-center ius" preventGrowOverflow={false} wrap="nowrap">
                         <TagsInput
                             label="Reply-to"
                             placeholder="ReplyTo..."
@@ -372,10 +389,10 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
 
                             placeholder="Chọn người gửi"
                             value={
-                                [    { value: "1", label: 'Nhập nội dung thủ công' },
-                                    { value: "2", label: 'Sử dụng mẫu văn bản' },
-                                    { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },
-                                ].find((o) => o.value === form.getValues().emailContent)?.label ??""
+                                [{ value: "1", label: 'Nhập nội dung thủ công' },
+                                { value: "2", label: 'Sử dụng mẫu văn bản' },
+                                { value: "3", label: 'Sử dụng tài nguyên hoặc biến khác' },
+                                ].find((o) => o.value === form.getValues().emailContent)?.label ?? ""
                             }
                             // onClick={(e) => {
                             //     const target = (e?.currentTarget as HTMLElement)?.closest<HTMLElement>("[data-popover-target]");
@@ -396,7 +413,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                                 <Button
 
                                     key={option.value}
-                                    variant={option.value === form.getValues().from? "light" : "transparent"}
+                                    variant={option.value === form.getValues().from ? "light" : "transparent"}
                                     fullWidth
                                     onClick={() => {
 
@@ -406,7 +423,7 @@ const EmailForm = forwardRef<childProps, ChildFormProps>(({ dataItem, onSubmit }
                                         // updateCondition(groupIndex, condIndex, "type", option.value || "")
                                     }}
                                 >
-                                  {option.label}
+                                    {option.label}
                                 </Button>
                             ))}
                         </Stack>
